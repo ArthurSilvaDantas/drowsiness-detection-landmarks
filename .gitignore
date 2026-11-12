@@ -1,0 +1,38 @@
+# Material do professor (fica em ../input_professor; nunca copiar para cá)
+input_professor/
+
+# Dataset WFLW (baixado com o script de download; licença própria)
+data/
+
+# Pesos e checkpoints (publicados no Hugging Face)
+weights/*
+!weights/.gitkeep
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+runs/
+checkpoints/
+wandb/
+
+# Entrega gerada pelo scripts/package_submission.py
+submission_build/
+*.log
+*.zip
+
+# Vídeos (gravações pessoais / saídas da aplicação)
+*.mp4
+*.avi
+*.mov
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# Sistema / editores
+.DS_Store
+.vscode/
+.idea/

@@ -1,0 +1,22 @@
+name: tpi
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - numpy
+  - matplotlib
+  - tqdm
+  - ipykernel   # kernel para o guia_basico.ipynb (VS Code ou Jupyter)
+  - jupyterlab
+  - pip
+  - pip:
+      # wheels CUDA 12.1: funcionam com driver NVIDIA >= 530 e também em CPU
+      - --extra-index-url https://download.pytorch.org/whl/cu121
+      - torch==2.5.1
+      - torchvision==0.20.1
+      - opencv-python<5  # versão pip tem suporte a janelas/webcam; a 5.x removeu o Haar
+      - kagglehub
+variables:
+  # ignora pacotes instalados com "pip install --user" (~/.local), que podem
+  # sobrepor as versões do ambiente (ex.: outro numpy/opencv)
+  PYTHONNOUSERSITE: "1"
