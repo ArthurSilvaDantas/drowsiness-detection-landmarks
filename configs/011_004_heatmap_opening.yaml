@@ -1,0 +1,43 @@
+# 011 - 004 + heatmap regularisation (1) + light eyelid opening loss (0.1).
+name: 011_004_heatmap_opening
+seed: 42
+
+data:
+  val_fraction: 0.1        # held out from the official TRAIN split, by image
+  input_size: 256
+  margin: 1.25             # crop side = margin x longest side of the face box
+
+augment:
+  rotation: 15             # degrees, uniform in [-15, 15]
+  scale: [0.85, 1.2]       # crop side factor (<1 zooms in, >1 zooms out)
+  translation: 0.06        # fraction of the crop, each axis
+  flip_prob: 0.5           # horizontal flip with Mirror98 reordering
+  color: 0.3               # brightness/contrast jitter amplitude
+
+model:
+  backbone: resnet18
+  pretrained: true         # ImageNet weights (torchvision)
+  head_channels: 256
+  num_deconv: 3            # 8 -> 16 -> 32 -> 64 heatmaps (stride 4)
+
+loss:
+  kind: l1                 # l1 | wing, on coordinates / input_size
+  eye_weight: 4.0          # weight of landmarks 60-75 (normalised to mean 1)
+  opening_weight: 0.1
+  heatmap_weight: 1.0
+  heatmap_sigma: 1.5
+
+sampler:
+  closed_eye_weight: 4.0   # >1 oversamples faces with annotated EAR below threshold
+  ear_threshold: 0.15
+
+train:
+  epochs: 40
+  batch_size: 32
+  optimizer: adamw
+  lr: 0.001                # head
+  backbone_lr: 0.0002      # pretrained backbone (fine-tuning)
+  weight_decay: 0.0001
+  warmup_epochs: 1
+  num_workers: 6
+  select_metric: val_nme   # metric used to keep the best epoch
