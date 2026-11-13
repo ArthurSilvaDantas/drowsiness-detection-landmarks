@@ -6,14 +6,14 @@ O passo a passo de cada parte, com figuras e explicações, está nos notebooks:
     treino              -> notebooks/04_treino.ipynb
     avaliação           -> notebooks/05_avaliacao.ipynb
 
-Seções deste arquivo:
+Partes deste arquivo:
     1. WFLW: leitura das anotações, Mirror98 e divisão treino/validação
     2. Geometria do recorte e augmentation
     3. Cache de recortes e Dataset do PyTorch
-    4. Modelo: ResNet-18 + cabeça deconv + soft-argmax (Seções 4.3-4.4)
+    4. Modelo: ResNet-18 + cabeça deconv + soft-argmax
     5. Perda nas coordenadas
-    6. Métricas: NME e EAR (Seções 6 e 8)
-    7. Detector de faces YuNet e inferência (Seções 7.2 e 11.2)
+    6. Métricas: NME e EAR
+    7. Detector de faces YuNet e inferência
 """
 
 from __future__ import annotations
